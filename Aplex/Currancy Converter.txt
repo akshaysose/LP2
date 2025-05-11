@@ -1,0 +1,52 @@
+public class CurrencyConverterCont {
+    public String fromCurrency { get; set; }
+    public String toCurrency { get; set; }
+    public Decimal amount { get; set; }
+    public Decimal convertedAmount { get; set; }
+
+    // Fixed exchange rates for demonstration (e.g., 1 USD = 0.85 EUR)
+    Map<String, Decimal> exchangeRates = new Map<String, Decimal>{
+        'USD_TO_EUR' => 0.85,
+        'EUR_TO_USD' => 1.18,
+        'USD_TO_INR' => 83.2,
+        'INR_TO_USD' => 0.012,
+        'EUR_TO_INR' => 89.5,
+        'INR_TO_EUR' => 0.0112
+    };
+
+    public void convert() {
+        if (fromCurrency == null || toCurrency == null || amount == null) {
+            convertedAmount = null;
+            return;
+        }
+
+        String key = fromCurrency + '_TO_' + toCurrency;
+
+        if (exchangeRates.containsKey(key)) {
+            convertedAmount = amount * exchangeRates.get(key);
+        } else if (fromCurrency == toCurrency) {
+            convertedAmount = amount; // No conversion needed
+        } else {
+            convertedAmount = null; // Unsupported conversion
+        }
+    }
+}
+
+
+//Driver Code
+// Create instance of the converter
+CurrencyConverterCont obj = new CurrencyConverterCont();
+
+// Set currencies and amount
+obj.fromCurrency = 'USD';
+obj.toCurrency = 'INR';
+obj.amount = 100;
+
+// Perform conversion
+obj.convert();
+
+// Output the result
+System.debug('=== Currency Conversion ===');
+System.debug('From: ' + obj.fromCurrency + ' To: ' + obj.toCurrency);
+System.debug('Amount: ' + obj.amount);
+System.debug('Converted Amount: ' + obj.convertedAmount);

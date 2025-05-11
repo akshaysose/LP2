@@ -1,0 +1,42 @@
+public class TemperatureConverterCont {
+    public Decimal temperature { get; set; }
+    public String fromUnit { get; set; }  // Celsius, Fahrenheit, Kelvin
+    public String toUnit { get; set; }    // Celsius, Fahrenheit, Kelvin
+    public Decimal convertedTemperature { get; set; }
+
+    // Method to convert temperature
+    public void convertTemperature() {
+        if (fromUnit == 'Celsius' && toUnit == 'Fahrenheit') {
+            convertedTemperature = (temperature * 9 / 5) + 32;
+        } else if (fromUnit == 'Celsius' && toUnit == 'Kelvin') {
+            convertedTemperature = temperature + 273.15;
+        } else if (fromUnit == 'Fahrenheit' && toUnit == 'Celsius') {
+            convertedTemperature = (temperature - 32) * 5 / 9;
+        } else if (fromUnit == 'Fahrenheit' && toUnit == 'Kelvin') {
+            convertedTemperature = (temperature - 32) * 5 / 9 + 273.15;
+        } else if (fromUnit == 'Kelvin' && toUnit == 'Celsius') {
+            convertedTemperature = temperature - 273.15;
+        } else if (fromUnit == 'Kelvin' && toUnit == 'Fahrenheit') {
+            convertedTemperature = (temperature - 273.15) * 9 / 5 + 32;
+        } else {
+            convertedTemperature = null;  // Invalid conversion case
+        }
+    }
+}
+
+//Driver Code
+// Create an instance of TemperatureConverterCont
+TemperatureConverterCont obj = new TemperatureConverterCont();
+
+// Set the temperature and units
+obj.temperature = 100;  // Example: 100 degrees
+obj.fromUnit = 'Celsius';  // Convert from Celsius
+obj.toUnit = 'Fahrenheit';  // Convert to Fahrenheit
+
+// Perform the conversion
+obj.convertTemperature();
+
+// Output the result to debug log
+System.debug('=== Temperature Conversion ===');
+System.debug('Temperature: ' + obj.temperature + ' ' + obj.fromUnit);
+System.debug('Converted Temperature: ' + obj.convertedTemperature + ' ' + obj.toUnit);

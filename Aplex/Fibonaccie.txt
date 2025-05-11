@@ -1,0 +1,51 @@
+public class FibonacciSeriesCont {
+    public Integer numberOfTerms { get; set; }  // Number of terms in the Fibonacci series
+    public List<Integer> fibonacciSeries { get; set; }
+
+    // Constructor to initialize the Fibonacci series list
+    public FibonacciSeriesCont() {
+        fibonacciSeries = new List<Integer>();
+    }
+
+    // Method to generate Fibonacci series up to the given number of terms
+    public void generateFibonacci() {
+        if (numberOfTerms <= 0) {
+            fibonacciSeries.add(0); // If non-positive number of terms, just add 0 to avoid empty list
+            return;
+        }
+        
+        Integer a = 0, b = 1;
+
+        // Add the first term
+        fibonacciSeries.add(a);
+        
+        // If number of terms > 1, add the second term
+        if (numberOfTerms > 1) {
+            fibonacciSeries.add(b);
+        }
+
+        // Generate the remaining Fibonacci series terms
+        for (Integer i = 2; i < numberOfTerms; i++) {
+            Integer nextTerm = a + b;
+            fibonacciSeries.add(nextTerm);
+            a = b;
+            b = nextTerm;
+        }
+    }
+}
+
+//Driver Code
+// Create an instance of FibonacciSeriesCont
+FibonacciSeriesCont obj = new FibonacciSeriesCont();
+
+// Set the number of terms for Fibonacci series
+obj.numberOfTerms = 10;  // Example: Generate first 10 Fibonacci numbers
+
+// Generate the Fibonacci series
+obj.generateFibonacci();
+
+// Output the result to the debug log
+System.debug('=== Fibonacci Series ===');
+System.debug('Number of Terms: ' + obj.numberOfTerms);
+System.debug('Fibonacci Series: ' + obj.fibonacciSeries);
+

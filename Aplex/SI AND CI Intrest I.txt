@@ -1,0 +1,49 @@
+public class CompoundInterestCont {
+    public Decimal principal { get; set; }
+    public Decimal rate { get; set; }
+    public Decimal duration { get; set; } // in years
+    public Integer n { get; set; }        // number of times interest is compounded per year
+
+    public Decimal compoundInterest { get; set; }
+    public Decimal simpleInterest { get; set; }
+    public Decimal amount { get; set; }
+
+    public void calculate() {
+        if (principal > 0 && rate > 0 && duration > 0 && n > 0) {
+            // Compound Interest Calculation
+            Double P = (Double) principal;
+            Double r = (Double) (rate / 100);
+            Double t = (Double) duration;
+            Double nt = n * t;
+            Double baseVal = 1 + (r / n);
+            Double A = P * Math.pow(baseVal, nt);
+            amount = (Decimal) A;
+            compoundInterest = amount - principal;
+
+            // Simple Interest Calculation
+            simpleInterest = (principal * rate * duration) / 100;
+        } else {
+            amount = 0;
+            compoundInterest = 0;
+            simpleInterest = 0;
+        }
+    }
+}
+
+//Driver Code
+// Create object
+CompoundInterestCont ci = new CompoundInterestCont();
+
+// Set input values
+ci.principal = 10000;
+ci.rate = 5;
+ci.duration = 3;
+ci.n = 4; // Compounded quarterly
+
+// Perform calculation
+ci.calculate();
+
+// Output results
+System.debug('Amount (Total) = ' + ci.amount);
+System.debug('Compound Interest = ' + ci.compoundInterest);
+System.debug('Simple Interest = ' + ci.simpleInterest);

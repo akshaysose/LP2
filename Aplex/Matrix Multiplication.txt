@@ -1,0 +1,60 @@
+public class MatrixMultiplicationCont {
+    public List<List<Integer>> matrix1 { get; set; }  // First matrix
+    public List<List<Integer>> matrix2 { get; set; }  // Second matrix
+    public List<List<Integer>> resultMatrix { get; set; }  // Resultant matrix after multiplication
+
+    // Constructor to initialize matrices and result matrix
+    public MatrixMultiplicationCont() {
+        matrix1 = new List<List<Integer>>();
+        matrix2 = new List<List<Integer>>();
+        resultMatrix = new List<List<Integer>>();
+    }
+
+    // Method to perform matrix multiplication
+    public void multiplyMatrices() {
+        // Check if the matrices are of compatible dimensions
+        if (matrix1.size() == 0 || matrix2.size() == 0 || matrix1[0].size() != matrix2.size()) {
+            System.debug('Matrix multiplication is not possible. Ensure that the number of columns in the first matrix is equal to the number of rows in the second matrix.');
+            return;
+        }
+
+        // Initialize resultMatrix with the correct dimensions (rows of matrix1, columns of matrix2)
+        for (Integer i = 0; i < matrix1.size(); i++) {
+            resultMatrix.add(new List<Integer>());
+            for (Integer j = 0; j < matrix2[0].size(); j++) {
+                Integer sum = 0;
+                // Perform the multiplication and sum the products
+                for (Integer k = 0; k < matrix1[0].size(); k++) {
+                    sum += matrix1[i][k] * matrix2[k][j];
+                }
+                resultMatrix[i].add(sum);
+            }
+        }
+    }
+}
+
+//Driver Code
+// Create an instance of MatrixMultiplicationCont
+MatrixMultiplicationCont obj = new MatrixMultiplicationCont();
+
+// Define a 2x3 matrix (matrix1)
+obj.matrix1 = new List<List<Integer>> {
+    new List<Integer>{1, 2, 3},
+    new List<Integer>{4, 5, 6}
+};
+
+// Define a 3x2 matrix (matrix2)
+obj.matrix2 = new List<List<Integer>> {
+    new List<Integer>{7, 8},
+    new List<Integer>{9, 10},
+    new List<Integer>{11, 12}
+};
+
+// Perform matrix multiplication
+obj.multiplyMatrices();
+
+// Output the result to the debug log
+System.debug('=== Matrix Multiplication Result ===');
+System.debug('Matrix 1: ' + obj.matrix1);
+System.debug('Matrix 2: ' + obj.matrix2);
+System.debug('Resultant Matrix: ' + obj.resultMatrix);

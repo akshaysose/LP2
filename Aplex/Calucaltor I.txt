@@ -1,0 +1,70 @@
+public class ScientificCalculatorCont {
+    public Decimal num1 { get; set; }
+    public Decimal num2 { get; set; }
+    public String operation { get; set; }
+    public Decimal result { get; set; }
+    public String errorMessage { get; set; }
+
+    public void calculate() {
+        try {
+            if (operation == 'Addition') {
+                result = num1 + num2;
+            } else if (operation == 'Subtraction') {
+                result = num1 - num2;
+            } else if (operation == 'Multiplication') {
+                result = num1 * num2;
+            } else if (operation == 'Division') {
+                if (num2 == 0) {
+                    errorMessage = 'Error: Division by zero is not allowed.';
+                    return;
+                }
+                result = num1 / num2;
+            } else if (operation == 'SquareRoot') {
+                if (num1 < 0) {
+                    errorMessage = 'Error: Cannot take the square root of a negative number.';
+                    return;
+                }
+                result = Math.sqrt(num1);
+            } else if (operation == 'Power') {
+                // Use Double to handle power operation
+                result = (Decimal) Math.pow((Double) num1, (Double) num2);
+            } else if (operation == 'Sine') {
+                result = Math.sin((Double) num1);
+            } else if (operation == 'Cosine') {
+                result = Math.cos((Double) num1);
+            } else if (operation == 'Tangent') {
+                result = Math.tan((Double) num1);
+            } else if (operation == 'Log') {
+                if (num1 <= 0) {
+                    errorMessage = 'Error: Logarithm undefined for non-positive numbers.';
+                    return;
+                }
+                result = Math.log((Double) num1);
+            } else {
+                errorMessage = 'Invalid operation';
+            }
+        } catch (Exception e) {
+            errorMessage = 'Error: ' + e.getMessage();
+        }
+    }
+}
+
+//Driver Code
+// Create object of ScientificCalculatorCont
+ScientificCalculatorCont calc = new ScientificCalculatorCont();
+
+// Set input values
+calc.num1 = 25;
+calc.num2 = 5;
+calc.operation = 'Power'; // Try: 'Addition', 'Subtraction', 'Multiplication', 'Division', 'SquareRoot', 'Power', 'Sine', 'Cosine', 'Tangent', 'Log'
+
+// Call the calculate method
+calc.calculate();
+
+// Output result or error
+if (calc.errorMessage != null) {
+    System.debug(calc.errorMessage);
+} else {
+    System.debug('Result = ' + calc.result);
+}
+

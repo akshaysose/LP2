@@ -1,0 +1,49 @@
+public class GeometryAreaCont {
+    public String shape { get; set; }
+    public Decimal length { get; set; }
+    public Decimal width { get; set; }
+    public Decimal radius { get; set; }
+    public Decimal baseVal { get; set; }
+    public Decimal height { get; set; }
+    public Decimal area { get; set; }
+
+    public List<SelectOption> getShapeOptions() {
+        return new List<SelectOption>{
+            new SelectOption('Square', 'Square'),
+            new SelectOption('Rectangle', 'Rectangle'),
+            new SelectOption('Circle', 'Circle'),
+            new SelectOption('Triangle', 'Triangle')
+        };
+    }
+
+    public void calculate() {
+        if(shape == 'Square' && length != null) {
+            area = length * length;
+        } else if(shape == 'Rectangle' && length != null && width != null) {
+            area = length * width;
+        } else if(shape == 'Circle' && radius != null) {
+            area = Math.PI * Math.pow((Double)radius, 2);
+        } else if(shape == 'Triangle' && baseVal != null && height != null) {
+            area = 0.5 * baseVal * height;
+        } else {
+            area = null;
+        }
+    }
+}
+
+//Driver Code
+// Create instance of GeometryAreaCont
+GeometryAreaCont obj = new GeometryAreaCont();
+
+// Set shape and corresponding dimensions
+obj.shape = 'Rectangle';
+obj.length = 10;
+obj.width = 5;
+
+// Call the calculate method
+obj.calculate();
+
+// Output the result to the debug log
+System.debug('=== Shape: ' + obj.shape + ' ===');
+System.debug('=== Calculated Area ===');
+System.debug(obj.area);

@@ -1,0 +1,54 @@
+public class MatrixAdditionCont {
+    public List<List<Integer>> matrix1 { get; set; }  // First matrix
+    public List<List<Integer>> matrix2 { get; set; }  // Second matrix
+    public List<List<Integer>> resultMatrix { get; set; }  // Resultant matrix after addition
+
+    // Constructor to initialize matrices and result matrix
+    public MatrixAdditionCont() {
+        matrix1 = new List<List<Integer>>();
+        matrix2 = new List<List<Integer>>();
+        resultMatrix = new List<List<Integer>>();
+    }
+
+    // Method to perform matrix addition
+    public void addMatrices() {
+        // Check if both matrices have the same dimensions
+        if (matrix1.size() != matrix2.size() || (matrix1.size() > 0 && matrix1[0].size() != matrix2[0].size())) {
+            System.debug('Matrices must be of the same size!');
+            return;
+        }
+
+        // Initialize resultMatrix with the same dimensions as input matrices
+        for (Integer i = 0; i < matrix1.size(); i++) {
+            resultMatrix.add(new List<Integer>());
+            for (Integer j = 0; j < matrix1[i].size(); j++) {
+                // Add corresponding elements from both matrices
+                resultMatrix[i].add(matrix1[i][j] + matrix2[i][j]);
+            }
+        }
+    }
+}
+
+//Driver Code
+// Create an instance of MatrixAdditionCont
+MatrixAdditionCont obj = new MatrixAdditionCont();
+
+// Define two 2x2 matrices to add
+obj.matrix1 = new List<List<Integer>> {
+    new List<Integer>{1, 2},
+    new List<Integer>{3, 4}
+};
+
+obj.matrix2 = new List<List<Integer>> {
+    new List<Integer>{5, 6},
+    new List<Integer>{7, 8}
+};
+
+// Perform matrix addition
+obj.addMatrices();
+
+// Output the result to the debug log
+System.debug('=== Matrix Addition Result ===');
+System.debug('Matrix 1: ' + obj.matrix1);
+System.debug('Matrix 2: ' + obj.matrix2);
+System.debug('Resultant Matrix: ' + obj.resultMatrix);

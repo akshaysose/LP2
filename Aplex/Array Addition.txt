@@ -1,0 +1,50 @@
+public class ArrayAdditionCont {
+    public String array1Text { get; set; }
+    public String array2Text { get; set; }
+    public String resultText { get; set; }
+
+    public void addArrays() {
+        if (String.isBlank(array1Text) || String.isBlank(array2Text)) {
+            resultText = 'Please enter both arrays.';
+            return;
+        }
+
+        List<String> arr1Str = array1Text.split(',');
+        List<String> arr2Str = array2Text.split(',');
+
+        if (arr1Str.size() != arr2Str.size()) {
+            resultText = 'Arrays must be of the same length.';
+            return;
+        }
+
+        List<Integer> resultArray = new List<Integer>();
+
+        for (Integer i = 0; i < arr1Str.size(); i++) {
+            try {
+                Integer val1 = Integer.valueOf(arr1Str[i].trim());
+                Integer val2 = Integer.valueOf(arr2Str[i].trim());
+                resultArray.add(val1 + val2);
+            } catch (Exception e) {
+                resultText = 'Invalid input. Ensure both arrays contain only numbers.';
+                return;
+            }
+        }
+
+        resultText = 'Result: ' + String.join(resultArray, ', ');
+    }
+}
+
+//Driver Code
+// Create an instance of the controller class
+ArrayAdditionCont obj = new ArrayAdditionCont();
+
+// Provide input arrays as comma-separated strings
+obj.array1Text = '1, 2, 3, 4';
+obj.array2Text = '5, 6, 7, 8';
+
+// Call the method to perform addition
+obj.addArrays();
+
+// Output the result to the debug log
+System.debug('=== ResultText ===');
+System.debug(obj.resultText);
